@@ -234,6 +234,12 @@
     flex-direction: column;
     gap: 8px;
   }
+  .car-meta-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
   .car-eyebrow {
     font-family: 'Raleway', sans-serif;
     font-size: 11px;
@@ -242,6 +248,15 @@
     text-transform: uppercase;
     color: var(--accent, var(--ink));
   }
+  .car-date {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--gray);
+    white-space: nowrap;
+  }
+  .car-date .sep { opacity: 0.5; margin: 0 2px; }
   .car-card h2 {
     font-family: 'Oswald', 'Raleway', sans-serif;
     font-weight: 700;
@@ -388,7 +403,10 @@
           <img src="House%20of%20Prayer/thumbs/15-doorway-cutout-gradient-A.jpg" alt="A House of Prayer cover concept" loading="lazy" />
         </div>
         <div class="car-meta">
-          <div class="car-eyebrow">Series 01</div>
+          <div class="car-meta-top">
+            <div class="car-eyebrow">Series 01</div>
+            <div class="car-date">7<span class="sep">/</span>19</div>
+          </div>
           <h2>A House of Prayer</h2>
           <p class="car-blurb">Concept exploration for the 21 Days of Prayer kickoff — atmosphere, light, and the threshold of devotion.</p>
         </div>
@@ -399,7 +417,10 @@
           <img src="Under%20New%20Management/thumbs/Concept 1.jpg" alt="Under New Management cover concept" loading="lazy" />
         </div>
         <div class="car-meta">
-          <div class="car-eyebrow">Series 02</div>
+          <div class="car-meta-top">
+            <div class="car-eyebrow">Series 02</div>
+            <div class="car-date">8<span class="sep">/</span>9</div>
+          </div>
           <h2>Under New Management</h2>
           <p class="car-blurb">Surrendering the inner world to the leadership of Jesus — authority, threshold, and a quiet handover.</p>
         </div>
@@ -410,7 +431,10 @@
           <img src="Pocket%20Change/thumbs/PC_Concept 2.jpg" alt="Pocket Change cover concept" loading="lazy" />
         </div>
         <div class="car-meta">
-          <div class="car-eyebrow">Series 03</div>
+          <div class="car-meta-top">
+            <div class="car-eyebrow">Series 03</div>
+            <div class="car-date">9<span class="sep">/</span>13</div>
+          </div>
           <h2>Pocket Change</h2>
           <p class="car-blurb">Honoring God with our finances — duality, transformation, and the small surrenders that change everything.</p>
         </div>
@@ -421,7 +445,10 @@
           <img src="Count%20It%20All%20Joy/thumbs/CIAJ_Concept 1.jpg" alt="Count It All Joy cover concept" loading="lazy" />
         </div>
         <div class="car-meta">
-          <div class="car-eyebrow">Series 04</div>
+          <div class="car-meta-top">
+            <div class="car-eyebrow">Series 04</div>
+            <div class="car-date">9<span class="sep">/</span>27</div>
+          </div>
           <h2>Count It All Joy</h2>
           <p class="car-blurb">Joy as a posture, not a feeling — the quiet defiance of choosing it beneath trials, pressure, and unfinished things.</p>
         </div>
