@@ -19,9 +19,10 @@
     --bg-soft: #fafafa;
 
     /* series accents */
-    --hop: #589a61;       /* House of Prayer — green */
-    --pc:  #a07034;       /* Pocket Change — bronze */
-    --unm: #6a2c3a;       /* Under New Management — wine */
+    --hop:  #589a61;      /* House of Prayer — green */
+    --pc:   #a07034;      /* Pocket Change — bronze */
+    --unm:  #6a2c3a;      /* Under New Management — wine */
+    --ciaj: #1c6e7e;      /* Count It All Joy — teal */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -246,9 +247,10 @@
   .card:hover .view::after { transform: translateX(4px); }
 
   /* per-card accents */
-  .card.hop { --accent: var(--hop); }
-  .card.pc  { --accent: var(--pc); }
-  .card.unm { --accent: var(--unm); }
+  .card.hop  { --accent: var(--hop); }
+  .card.pc   { --accent: var(--pc); }
+  .card.unm  { --accent: var(--unm); }
+  .card.ciaj { --accent: var(--ciaj); }
 
   /* ----- Footer ----- */
   footer {
@@ -298,7 +300,7 @@
 
 <div class="section-label">
   <div class="kicker">Series</div>
-  <div class="count">03 / Active</div>
+  <div class="count">04 / Active</div>
 </div>
 
 <main>
@@ -328,12 +330,24 @@
       </div>
     </a>
 
+    <a class="card ciaj" href="Count%20It%20All%20Joy/index.html">
+      <div class="cover">
+        <img src="Count%20It%20All%20Joy/thumbs/CIAJ_Concept 1.jpg" alt="Count It All Joy cover concept" loading="lazy" />
+      </div>
+      <div class="body">
+        <div class="eyebrow">Series 03</div>
+        <h2>Count It All Joy</h2>
+        <p>Joy as a posture, not a feeling — the quiet defiance of choosing it beneath trials, pressure, and unfinished things.</p>
+        <span class="view">View Concepts</span>
+      </div>
+    </a>
+
     <a class="card pc" href="Pocket%20Change/index.html">
       <div class="cover">
         <img src="Pocket%20Change/thumbs/PC_Concept 2.jpg" alt="Pocket Change cover concept" loading="lazy" />
       </div>
       <div class="body">
-        <div class="eyebrow">Series 03</div>
+        <div class="eyebrow">Series 04</div>
         <h2>Pocket Change</h2>
         <p>Honoring God with our finances — duality, transformation, and the small surrenders that change everything.</p>
         <span class="view">View Concepts</span>
