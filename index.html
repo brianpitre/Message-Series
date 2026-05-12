@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Series Studio — Message Series Concepts</title>
+<meta name="description" content="A studio index of generative concept imagery for upcoming message series." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Raleway:wght@400;500;700;900&family=Source+Serif+Pro:wght@300;400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #111;
+    --black: #000;
+    --gray: #6d6d6d;
+    --gray-mid: #b5b5b5;
+    --gray-light: #e1e1e1;
+    --bg: #ffffff;
+    --bg-soft: #fafafa;
+
+    /* series accents */
+    --hop: #589a61;       /* House of Prayer — green */
+    --pc:  #a07034;       /* Pocket Change — bronze */
+    --unm: #6a2c3a;       /* Under New Management — wine */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Serif Pro', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a { color: inherit; }
+
+  /* ----- Header ----- */
+  header {
+    border-bottom: 1px solid var(--gray-light);
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 22px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand .dot {
+    width: 8px; height: 8px;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .nav-meta {
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* ----- Hero ----- */
+  .hero {
+    text-align: center;
+    padding: 112px 32px 72px;
+    border-bottom: 1px solid var(--gray-light);
+    background: var(--bg-soft);
+  }
+  .hero .eyebrow {
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: 'Oswald', 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: clamp(40px, 7vw, 84px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.02;
+    color: var(--black);
+  }
+  .hero h1 .stack { display: block; }
+  .hero h1 .thin {
+    font-weight: 500;
+    color: var(--gray);
+  }
+  .hero .lede {
+    margin: 30px auto 0;
+    max-width: 620px;
+    font-size: 18px;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  .hero .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--ink);
+    margin: 36px auto 0;
+  }
+
+  /* ----- Section label row ----- */
+  .section-label {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 64px 32px 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    border: 0;
+  }
+  .section-label .kicker {
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .section-label .count {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* ----- Grid ----- */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 32px 120px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 28px;
+  }
+  @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; gap: 20px; } main { padding: 24px 20px 80px; } .hero { padding: 80px 20px 56px; } }
+
+  /* ----- Card ----- */
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--gray-light);
+    text-decoration: none;
+    color: inherit;
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    overflow: hidden;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+    border-color: transparent;
+  }
+  .card .cover {
+    aspect-ratio: 4 / 5;
+    background: var(--bg-soft);
+    overflow: hidden;
+    position: relative;
+  }
+  .card .cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .8s ease;
+  }
+  .card:hover .cover img { transform: scale(1.04); }
+
+  .card .body {
+    padding: 26px 26px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-top: 4px solid var(--accent, var(--ink));
+  }
+  .card .eyebrow {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--accent, var(--ink));
+  }
+  .card h2 {
+    font-family: 'Oswald', 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: var(--black);
+  }
+  .card p {
+    font-size: 15.5px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+  .card .view {
+    margin-top: 6px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card .view::after {
+    content: "→";
+    transition: transform .25s ease;
+  }
+  .card:hover .view::after { transform: translateX(4px); }
+
+  /* per-card accents */
+  .card.hop { --accent: var(--hop); }
+  .card.pc  { --accent: var(--pc); }
+  .card.unm { --accent: var(--unm); }
+
+  /* ----- Footer ----- */
+  footer {
+    border-top: 1px solid var(--gray-light);
+    padding: 28px 32px;
+    background: #fff;
+  }
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  @media (max-width: 560px) {
+    .footer-inner { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="./index.html">
+      <span class="dot"></span>
+      Series<span style="opacity:.55; margin-left:6px;">Studio</span>
+    </a>
+    <span class="nav-meta">Concept Index</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Message Series</div>
+  <h1>
+    <span class="stack">Visual</span>
+    <span class="stack thin">Concepts</span>
+  </h1>
+  <p class="lede">A working index of generative concept imagery exploring tone, atmosphere, and visual language for upcoming message series.</p>
+  <div class="divider"></div>
+</section>
+
+<div class="section-label">
+  <div class="kicker">Series</div>
+  <div class="count">03 / Active</div>
+</div>
+
+<main>
+  <div class="grid">
+
+    <a class="card hop" href="House%20of%20Prayer/index.html">
+      <div class="cover">
+        <img src="House%20of%20Prayer/thumbs/10-surreal-sky-integrated-A.jpg" alt="A House of Prayer cover concept" loading="lazy" />
+      </div>
+      <div class="body">
+        <div class="eyebrow">Series 01</div>
+        <h2>A House of Prayer</h2>
+        <p>Concept exploration for the 21 Days of Prayer kickoff — atmosphere, light, and the threshold of devotion.</p>
+        <span class="view">View Concepts</span>
+      </div>
+    </a>
+
+    <a class="card unm" href="Under%20New%20Management/index.html">
+      <div class="cover">
+        <img src="Under%20New%20Management/thumbs/Concept 1.jpg" alt="Under New Management cover concept" loading="lazy" />
+      </div>
+      <div class="body">
+        <div class="eyebrow">Series 02</div>
+        <h2>Under New Management</h2>
+        <p>Surrendering the inner world to the leadership of Jesus — authority, threshold, and a quiet handover.</p>
+        <span class="view">View Concepts</span>
+      </div>
+    </a>
+
+    <a class="card pc" href="Pocket%20Change/index.html">
+      <div class="cover">
+        <img src="Pocket%20Change/thumbs/PC_Concept 1.jpg" alt="Pocket Change cover concept" loading="lazy" />
+      </div>
+      <div class="body">
+        <div class="eyebrow">Series 03</div>
+        <h2>Pocket Change</h2>
+        <p>Honoring God with our finances — duality, transformation, and the small surrenders that change everything.</p>
+        <span class="view">View Concepts</span>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>Series Studio</span>
+    <span>Concept Index · 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
