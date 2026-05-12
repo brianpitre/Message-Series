@@ -19,10 +19,10 @@
     --bg-soft: #fafafa;
 
     /* series accents */
-    --hop:  #589a61;      /* House of Prayer — green */
-    --pc:   #a07034;      /* Pocket Change — bronze */
-    --unm:  #6a2c3a;      /* Under New Management — wine */
-    --ciaj: #1c6e7e;      /* Count It All Joy — teal */
+    --hop:  #589a61;
+    --pc:   #a07034;
+    --unm:  #6a2c3a;
+    --ciaj: #1c6e7e;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -134,7 +134,6 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 24px;
-    border: 0;
   }
   .section-label .kicker {
     font-family: 'Raleway', sans-serif;
@@ -152,61 +151,90 @@
     color: var(--gray);
   }
 
-  /* ----- Grid ----- */
+  /* ----- Carousel ----- */
   main {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 32px 32px 120px;
+    padding: 28px 0 120px;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    margin-top: 28px;
+  .carousel {
+    position: relative;
   }
-  @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
-  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; gap: 20px; } main { padding: 24px 20px 80px; } .hero { padding: 80px 20px 56px; } }
 
-  /* ----- Card ----- */
-  .card {
+  .car-track {
     display: flex;
-    flex-direction: column;
-    background: #fff;
-    border: 1px solid var(--gray-light);
+    gap: 24px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 16px 32px 80px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .car-track::-webkit-scrollbar { display: none; }
+
+  /* horizontal centering: match the page's editorial inset on wide screens */
+  @media (min-width: 1280px) {
+    .car-track { padding-inline: max(32px, calc((100vw - 1280px) / 2 + 32px)); }
+  }
+
+  .car-card {
+    flex: 0 0 400px;
+    scroll-snap-align: start;
     text-decoration: none;
     color: inherit;
-    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .35s cubic-bezier(.2,.7,.2,1);
+    will-change: transform;
+  }
+  @media (max-width: 980px) { .car-card { flex: 0 0 340px; } }
+  @media (max-width: 640px) { .car-card { flex: 0 0 82vw; } }
+
+  .car-thumb {
     position: relative;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-    border-color: transparent;
-  }
-  .card .cover {
-    aspect-ratio: 4 / 5;
+    width: 100%;
+    aspect-ratio: 16 / 9;
     background: var(--bg-soft);
+    border-radius: 4px;
     overflow: hidden;
-    position: relative;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: box-shadow .35s ease, transform .35s cubic-bezier(.2,.7,.2,1);
   }
-  .card .cover img {
+  .car-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     transition: transform .8s ease;
   }
-  .card:hover .cover img { transform: scale(1.04); }
+  .car-thumb::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 4px;
+    background: var(--accent, var(--ink));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  }
 
-  .card .body {
-    padding: 26px 26px 28px;
+  .car-card:hover .car-thumb,
+  .car-card:focus-visible .car-thumb {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 48px rgba(0,0,0,0.16);
+  }
+  .car-card:hover .car-thumb img,
+  .car-card:focus-visible .car-thumb img { transform: scale(1.05); }
+  .car-card:hover .car-thumb::after,
+  .car-card:focus-visible .car-thumb::after { transform: scaleX(1); }
+
+  .car-meta {
+    padding: 18px 4px 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    border-top: 4px solid var(--accent, var(--ink));
+    gap: 8px;
   }
-  .card .eyebrow {
+  .car-eyebrow {
     font-family: 'Raleway', sans-serif;
     font-size: 11px;
     font-weight: 700;
@@ -214,43 +242,89 @@
     text-transform: uppercase;
     color: var(--accent, var(--ink));
   }
-  .card h2 {
+  .car-card h2 {
     font-family: 'Oswald', 'Raleway', sans-serif;
     font-weight: 700;
-    font-size: 26px;
+    font-size: 28px;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    line-height: 1.1;
+    line-height: 1.05;
     color: var(--black);
   }
-  .card p {
-    font-size: 15.5px;
+  .car-blurb {
+    font-size: 14.5px;
     color: var(--gray);
-    line-height: 1.6;
+    line-height: 1.55;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height .35s ease, opacity .35s ease, margin-top .35s ease;
+    margin-top: 0;
   }
-  .card .view {
-    margin-top: 6px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+  .car-card:hover .car-blurb,
+  .car-card:focus-visible .car-blurb {
+    max-height: 96px;
+    opacity: 1;
+    margin-top: 4px;
   }
-  .card .view::after {
-    content: "→";
-    transition: transform .25s ease;
+  /* on touch devices, just always show the blurb */
+  @media (hover: none) {
+    .car-blurb { max-height: 96px; opacity: 1; margin-top: 4px; }
   }
-  .card:hover .view::after { transform: translateX(4px); }
 
   /* per-card accents */
-  .card.hop  { --accent: var(--hop); }
-  .card.pc   { --accent: var(--pc); }
-  .card.unm  { --accent: var(--unm); }
-  .card.ciaj { --accent: var(--ciaj); }
+  .car-card.hop  { --accent: var(--hop); }
+  .car-card.unm  { --accent: var(--unm); }
+  .car-card.pc   { --accent: var(--pc); }
+  .car-card.ciaj { --accent: var(--ciaj); }
+
+  /* ----- Carousel arrows ----- */
+  .car-arrow {
+    position: absolute;
+    top: calc(16px + (100% - 96px) * 0); /* placeholder, JS sets via CSS var */
+    transform: translateY(-50%);
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid var(--gray-light);
+    color: var(--ink);
+    font-size: 22px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    opacity: 0;
+    transition: opacity .25s ease, background .2s ease, transform .2s ease;
+    user-select: none;
+    padding: 0;
+    font-family: inherit;
+  }
+  .carousel:hover .car-arrow,
+  .car-arrow:focus-visible { opacity: 1; }
+  .car-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
+  .car-arrow[disabled] { opacity: 0 !important; pointer-events: none; }
+  .car-prev { left: 16px; top: calc(50% - 32px); }
+  .car-next { right: 16px; top: calc(50% - 32px); }
+  @media (hover: none) { .car-arrow { display: none; } }
+
+  /* edge fades for cinematic peek */
+  .carousel::before,
+  .carousel::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .carousel::before { left: 0; background: linear-gradient(to right, #fff 10%, rgba(255,255,255,0)); }
+  .carousel::after  { right: 0; background: linear-gradient(to left,  #fff 10%, rgba(255,255,255,0)); }
+  @media (max-width: 640px) {
+    .carousel::before, .carousel::after { width: 28px; }
+  }
 
   /* ----- Footer ----- */
   footer {
@@ -304,56 +378,58 @@
 </div>
 
 <main>
-  <div class="grid">
+  <div class="carousel" id="carousel">
+    <button class="car-arrow car-prev" id="carPrev" aria-label="Scroll left" type="button">‹</button>
 
-    <a class="card hop" href="House%20of%20Prayer/index.html">
-      <div class="cover">
-        <img src="House%20of%20Prayer/thumbs/15-doorway-cutout-gradient-A.jpg" alt="A House of Prayer cover concept" loading="lazy" />
-      </div>
-      <div class="body">
-        <div class="eyebrow">Series 01</div>
-        <h2>A House of Prayer</h2>
-        <p>Concept exploration for the 21 Days of Prayer kickoff — atmosphere, light, and the threshold of devotion.</p>
-        <span class="view">View Concepts</span>
-      </div>
-    </a>
+    <div class="car-track" id="carTrack">
 
-    <a class="card unm" href="Under%20New%20Management/index.html">
-      <div class="cover">
-        <img src="Under%20New%20Management/thumbs/Concept 1.jpg" alt="Under New Management cover concept" loading="lazy" />
-      </div>
-      <div class="body">
-        <div class="eyebrow">Series 02</div>
-        <h2>Under New Management</h2>
-        <p>Surrendering the inner world to the leadership of Jesus — authority, threshold, and a quiet handover.</p>
-        <span class="view">View Concepts</span>
-      </div>
-    </a>
+      <a class="car-card hop" href="House%20of%20Prayer/index.html">
+        <div class="car-thumb">
+          <img src="House%20of%20Prayer/thumbs/15-doorway-cutout-gradient-A.jpg" alt="A House of Prayer cover concept" loading="lazy" />
+        </div>
+        <div class="car-meta">
+          <div class="car-eyebrow">Series 01</div>
+          <h2>A House of Prayer</h2>
+          <p class="car-blurb">Concept exploration for the 21 Days of Prayer kickoff — atmosphere, light, and the threshold of devotion.</p>
+        </div>
+      </a>
 
-    <a class="card ciaj" href="Count%20It%20All%20Joy/index.html">
-      <div class="cover">
-        <img src="Count%20It%20All%20Joy/thumbs/CIAJ_Concept 1.jpg" alt="Count It All Joy cover concept" loading="lazy" />
-      </div>
-      <div class="body">
-        <div class="eyebrow">Series 03</div>
-        <h2>Count It All Joy</h2>
-        <p>Joy as a posture, not a feeling — the quiet defiance of choosing it beneath trials, pressure, and unfinished things.</p>
-        <span class="view">View Concepts</span>
-      </div>
-    </a>
+      <a class="car-card unm" href="Under%20New%20Management/index.html">
+        <div class="car-thumb">
+          <img src="Under%20New%20Management/thumbs/Concept 1.jpg" alt="Under New Management cover concept" loading="lazy" />
+        </div>
+        <div class="car-meta">
+          <div class="car-eyebrow">Series 02</div>
+          <h2>Under New Management</h2>
+          <p class="car-blurb">Surrendering the inner world to the leadership of Jesus — authority, threshold, and a quiet handover.</p>
+        </div>
+      </a>
 
-    <a class="card pc" href="Pocket%20Change/index.html">
-      <div class="cover">
-        <img src="Pocket%20Change/thumbs/PC_Concept 2.jpg" alt="Pocket Change cover concept" loading="lazy" />
-      </div>
-      <div class="body">
-        <div class="eyebrow">Series 04</div>
-        <h2>Pocket Change</h2>
-        <p>Honoring God with our finances — duality, transformation, and the small surrenders that change everything.</p>
-        <span class="view">View Concepts</span>
-      </div>
-    </a>
+      <a class="car-card pc" href="Pocket%20Change/index.html">
+        <div class="car-thumb">
+          <img src="Pocket%20Change/thumbs/PC_Concept 2.jpg" alt="Pocket Change cover concept" loading="lazy" />
+        </div>
+        <div class="car-meta">
+          <div class="car-eyebrow">Series 03</div>
+          <h2>Pocket Change</h2>
+          <p class="car-blurb">Honoring God with our finances — duality, transformation, and the small surrenders that change everything.</p>
+        </div>
+      </a>
 
+      <a class="car-card ciaj" href="Count%20It%20All%20Joy/index.html">
+        <div class="car-thumb">
+          <img src="Count%20It%20All%20Joy/thumbs/CIAJ_Concept 1.jpg" alt="Count It All Joy cover concept" loading="lazy" />
+        </div>
+        <div class="car-meta">
+          <div class="car-eyebrow">Series 04</div>
+          <h2>Count It All Joy</h2>
+          <p class="car-blurb">Joy as a posture, not a feeling — the quiet defiance of choosing it beneath trials, pressure, and unfinished things.</p>
+        </div>
+      </a>
+
+    </div>
+
+    <button class="car-arrow car-next" id="carNext" aria-label="Scroll right" type="button">›</button>
   </div>
 </main>
 
@@ -363,6 +439,36 @@
     <span>Concept Index · 2026</span>
   </div>
 </footer>
+
+<script>
+  const track = document.getElementById('carTrack');
+  const prev = document.getElementById('carPrev');
+  const next = document.getElementById('carNext');
+
+  function step() {
+    const card = track.querySelector('.car-card');
+    if (!card) return 400;
+    const style = window.getComputedStyle(track);
+    const gap = parseFloat(style.columnGap || style.gap || 24) || 24;
+    return card.getBoundingClientRect().width + gap;
+  }
+  function update() {
+    const max = track.scrollWidth - track.clientWidth - 1;
+    prev.disabled = track.scrollLeft <= 0;
+    next.disabled = track.scrollLeft >= max;
+  }
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left:  step(), behavior: 'smooth' }));
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+
+  // Keyboard navigation when carousel is hovered/focused
+  document.getElementById('carousel').addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { next.click(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft')  { prev.click(); e.preventDefault(); }
+  });
+</script>
 
 </body>
 </html>
