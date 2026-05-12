@@ -283,13 +283,42 @@
   }
 
   body.lb-open { overflow: hidden; }
+
+  /* ----- Back to Hub ----- */
+  .back {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: color .2s ease;
+  }
+  .back .back-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--accent, var(--green));
+    color: #fff;
+    font-size: 15px;
+    line-height: 1;
+    transition: transform .25s ease;
+  }
+  .back:hover { color: var(--accent, var(--green)); }
+  .back:hover .back-arrow { transform: translateX(-3px); }
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <a href="#" class="brand">A House of Prayer<span class="accent"> · </span>Concepts</a>
+    <a href="../index.html" class="back" aria-label="Back to all series"><span class="back-arrow" aria-hidden="true">←</span>All Series</a>
     <span class="nav-meta">AI Visual Direction</span>
   </div>
 </header>
